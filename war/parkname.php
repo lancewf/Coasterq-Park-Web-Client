@@ -1,0 +1,1 @@
+[{"parkName":"Disenyland Resort","isFasspassAvailable":false}]
