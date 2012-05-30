@@ -8,6 +8,7 @@ import com.coasterq.client.connection.LogInUser;
 import com.coasterq.client.connection.LogOutUser;
 import com.coasterq.client.connection.ReleaseServiceLocations;
 import com.coasterq.client.connection.ServiceLocations;
+import com.coasterq.client.connection.TestServiceLocations;
 import com.coasterq.client.view.MainTabPanel;
 import com.coasterq.client.view.ParkTitlePanel;
 import com.finfrock.client.LocationManager;
@@ -102,7 +103,7 @@ public class GUIBuilder
    
    private ServiceLocations createServiceLocations()
    {
-      return new ReleaseServiceLocations();
-      //return new TestServiceLocations();
+//      return new ReleaseServiceLocations();
+      return new TestServiceLocations();
    }
 }

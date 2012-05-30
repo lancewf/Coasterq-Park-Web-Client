@@ -9,16 +9,5 @@
   <welcome-file-list>
     <welcome-file>Coasterqclient.html</welcome-file>
   </welcome-file-list>
-  
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.coasterq.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/coasterqclient/greet</url-pattern>
-  </servlet-mapping>
 
 </web-app>

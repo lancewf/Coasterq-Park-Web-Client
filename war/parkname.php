@@ -1,1 +1,1 @@
-[{"parkName":"Disenyland Resort","isFasspassAvailable":false}]
+[{"parkName":"Disenyland Resort","isFasspassAvailable":false,"latitude":50.9,"longitude":-144.4}]
