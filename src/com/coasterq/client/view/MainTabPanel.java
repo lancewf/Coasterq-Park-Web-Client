@@ -35,7 +35,6 @@ public class MainTabPanel extends TabPanel
    private RideSearchPanel rideSearchPanel;
    private EnterWaitTimePanel enterWaitTimePanel;
    private RideGraphPanel rideGraphPanel;
-   private FacebookPanel facebookPanel;
    
    // --------------------------------------------------------------------------
    // Constructor
@@ -46,13 +45,11 @@ public class MainTabPanel extends TabPanel
                        ItineraryRideManagerable itineraryRideManager, 
                        ParkInformation parkInformation, 
                        ParkClock parkClock, 
-                       CQImageBundle cqImageBundle, 
-                       FacebookCoasterqConnection facebookConnectionStatus, 
+                       CQImageBundle cqImageBundle,
                        ParkLocationManager parkLocationManager)
    {
       initialize(serviceLocations, rideManager, 
-         itineraryRideManager, parkInformation, parkClock, cqImageBundle, 
-         facebookConnectionStatus, parkLocationManager);
+         itineraryRideManager, parkInformation, parkClock, cqImageBundle, parkLocationManager);
    }
    
    // --------------------------------------------------------------------------
@@ -79,14 +76,12 @@ public class MainTabPanel extends TabPanel
                            RideManagerable rideManager, 
                            ItineraryRideManagerable itineraryRideManager, 
                            ParkInformation parkInformation, 
-                           ParkClock parkClock, CQImageBundle cqImageBundle, 
-                           FacebookCoasterqConnection facebookConnectionStatus, 
+                           ParkClock parkClock, CQImageBundle cqImageBundle,
                            ParkLocationManager parkLocationManager)
    {  
       createTabs(rideManager,
          itineraryRideManager,
-         serviceLocations, parkInformation, parkClock, cqImageBundle, 
-         facebookConnectionStatus, parkLocationManager);      
+         serviceLocations, parkInformation, parkClock, cqImageBundle, parkLocationManager);      
       setAnimationEnabled(true);
       
       selectTab();
@@ -146,8 +141,7 @@ public class MainTabPanel extends TabPanel
    private void createTabs(RideManagerable rideManager, 
       ItineraryRideManagerable itineraryRideManager, 
       ServiceLocations serviceLocations, ParkInformation parkInformation, 
-      ParkClock parkClock, CQImageBundle cqImageBundle, 
-      FacebookCoasterqConnection facebookConnectionStatus, 
+      ParkClock parkClock, CQImageBundle cqImageBundle,
       ParkLocationManager parkLocationManager)
    {
       WaitTimeSender waitTimeSender = new WaitTimeSender(serviceLocations);
@@ -157,18 +151,13 @@ public class MainTabPanel extends TabPanel
       rideSearchPanel = new RideSearchPanel(rideManager, 
          itineraryRideManager, parkInformation, cqImageBundle);
       enterWaitTimePanel = new EnterWaitTimePanel(rideManager, 
-         waitTimeSender, parkClock, parkInformation, serviceLocations, 
-         facebookConnectionStatus, parkLocationManager);
-      
-      facebookPanel = createFacebookPanel(rideManager, serviceLocations, 
-         facebookConnectionStatus);
+         waitTimeSender, parkClock, parkInformation, serviceLocations, parkLocationManager);
       
       //rideGraphPanel = new RideGraphPanel(rideManager);
       
       add(myQPanel, myQPanel.getName());
       add(rideSearchPanel, rideSearchPanel.getName());
       add(enterWaitTimePanel, enterWaitTimePanel.getName());
-      add(facebookPanel, facebookPanel.getName());
       //add(rideGraphPanel, rideGraphPanel.getName());
    }
 }

@@ -68,27 +68,15 @@ public class GUIBuilder
          GWT.create(CQImageBundle.class);
       LocationManager locationManager = new LocationManager();
       
-      LogInUser logInUser = new LogInUser(serviceLocations, rideManager, 
-         itineraryRideManager);
-      LogOutUser logOutUser = new LogOutUser(serviceLocations);
-      
       ParkLocationManager parkLocationManager = 
          new ParkLocationManager(locationManager, parkInformation);
       
-      FacebookCoasterqConnection facebookConnectionStatus = 
-         new FacebookCoasterqConnection(logInUser, logOutUser);
-      
       Widget tabPanel = new MainTabPanel(serviceLocations, rideManager, 
-         itineraryRideManager, parkInformation, parkClock, cqImageBundle, 
-         facebookConnectionStatus, parkLocationManager);
+         itineraryRideManager, parkInformation, parkClock, cqImageBundle, parkLocationManager);
       
       final VerticalPanel mainPanel = new VerticalPanel();
       
       mainPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
-      
-      UserPanel userPanel = new UserPanel(facebookConnectionStatus);
-      
-      mainPanel.add(userPanel);
       
       mainPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
       
@@ -103,7 +91,7 @@ public class GUIBuilder
    
    private ServiceLocations createServiceLocations()
    {
-//      return new ReleaseServiceLocations();
-      return new TestServiceLocations();
+      return new ReleaseServiceLocations();
+//      return new TestServiceLocations();
    }
 }

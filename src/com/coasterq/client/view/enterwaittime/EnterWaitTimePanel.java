@@ -42,7 +42,6 @@ public class EnterWaitTimePanel extends VerticalPanel
    private SubmitPagePanel submitPagePanel;
    private ServiceLocations serviceLocations;
    private ParkInformation parkInformation;
-   private FacebookConnectionStatus facebookConnectionStatus;
    private Widget facebookNotice;
    private LocationPanel locationPanel;
    private ParkLocationManager parkLocationManager;
@@ -56,7 +55,6 @@ public class EnterWaitTimePanel extends VerticalPanel
                              ParkClock parkClock, 
                              ParkInformation parkInformation,
                              ServiceLocations serviceLocations, 
-                             FacebookConnectionStatus facebookConnectionStatus, 
                              ParkLocationManager parkLocationManager)
    {
       this.parkClock = parkClock;
@@ -64,7 +62,6 @@ public class EnterWaitTimePanel extends VerticalPanel
       this.waitTimeSender = waitTimeSender;
       this.serviceLocations = serviceLocations;
       this.parkInformation = parkInformation;
-      this.facebookConnectionStatus = facebookConnectionStatus;
       this.parkLocationManager = parkLocationManager;
       
       initialize(parkClock);
@@ -114,22 +111,6 @@ public class EnterWaitTimePanel extends VerticalPanel
       
       submitPagePanel.setVisible(false);
       
-      facebookConnectionStatus.addLoggedinListener(new DataChangeListener()
-      {
-         @Override
-         public void onDataChange()
-         {
-            if(facebookConnectionStatus.isloggedin())
-            {
-               facebookNotice.setVisible(false);
-            }
-            else
-            {
-               facebookNotice.setVisible(true);
-            }
-         }
-      });
-      
       add(submitPagePanel);
       add(closedPanel);
       add(openPanel);
@@ -161,12 +142,6 @@ public class EnterWaitTimePanel extends VerticalPanel
       waitTimeControl = new WaitTimeControl();
       timeSelections = new TimeOfDayControl(parkClock);
       dateControl = new DateControl(parkClock);
-      facebookNotice = createFacebookNotice();
-      
-      if(facebookConnectionStatus.isloggedin())
-      {
-         facebookNotice.setVisible(false);
-      }
       
       openPanel.add(locationPanel);
       openPanel.add(rideListBox);
@@ -176,14 +151,8 @@ public class EnterWaitTimePanel extends VerticalPanel
       openPanel.add(createWaitTimeLabel());
       openPanel.add(waitTimeControl);
       openPanel.add(createSubmitButton());
-      openPanel.add(facebookNotice);
       
       return openPanel;
-   }
-   
-   private Widget createFacebookNotice()
-   {
-      return new Label("* To share with friends on Facebook, log in to Facebook on CoasterQ's site by clicking the button at the top of the page.");
    }
    
    private Widget createSubmitButton()
@@ -204,23 +173,6 @@ public class EnterWaitTimePanel extends VerticalPanel
          public void onClick(ClickEvent event)
          {
             RideWaitEntry rideWaitEntry = getRideWaitEntry();
-            
-            if(facebookConnectionStatus.isloggedin())
-            {
-               String caption = "{*actor*} rode on the "
-                     + rideWaitEntry.getRide().getName() + " ride at "
-                     + parkInformation.getParkName();
-
-               FacebookConnectionStatus.publishToUserWall("Is riding "
-                     + rideWaitEntry.getRide().getName(),
-                  "http://apps.facebook.com/coasterq",
-                  caption,
-                  serviceLocations.getHomeUrl() + "/img/facebookpicture.png",
-                  "http://apps.facebook.com/coasterq",
-                  "Tell your friends",
-                  "Visit CoasterQ",
-                  "http://apps.facebook.com/coasterq");
-            }
             
             waitTimeSender.update(rideWaitEntry);
             
